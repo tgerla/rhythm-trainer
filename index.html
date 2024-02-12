@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Images</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            /* Hide horizontal overflow */
+        }
+
+        .image {
+            width: 96px;
+            /* Adjust the width of your images */
+            height: 148px;
+            /* Adjust the height of your images */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="imageContainer">
+        <!-- Images will be added here dynamically -->
+    </div>
+    <div id="controls">
+        <button onclick="location.href='index.html?measures=1'">1 measure</button>
+        <button onclick="location.href='index.html?measures=2'">2 measures</button>
+        <button onclick="showRandomImages()">Refresh</button>
+    </div>
+
+
+    <script>
+        // Function to generate a random image number (assuming 3 images on disk)
+        function getRandomImageNumber() {
+            return Math.floor(Math.random() * 3) + 1; // Adjust based on the number of images
+        }
+
+        // Function to display random images
+        function displayRandomImages(imageContainer) {
+            // erase all images from imageContainer
+
+            const rows = document.createElement('div');
+
+            for (let i = 0; i < 4; i++) {
+                const imageElement = document.createElement('img');
+                imageElement.className = 'image';
+                const randomImageNumber = getRandomImageNumber();
+                imageElement.src = `image${randomImageNumber}.jpg`; // Adjust the image path and format
+                rows.appendChild(imageElement);
+            }
+            imageContainer.appendChild(rows);
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const measures = urlParams.get('measures') || 1;
+
+        function showRandomImages(measures = 1) {
+            const imageContainer = document.getElementById('imageContainer');
+            imageContainer.innerHTML = '';
+
+            for (let i = 0; i < measures; i++)
+                displayRandomImages(imageContainer);
+        }
+
+        showRandomImages(measures);
+    </script>
+</body>
+
+</html>
