@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.3/build/cjs/vexflow.js"></script>
 
     <title>Rhythm Trainer</title>
     <style>
@@ -62,45 +63,106 @@
 
 
     <script>
-        // Function to generate a random image number (assuming 3 images on disk)
+        const { Renderer, Stave, StaveNote, Voice, Formatter, Beam } = Vex.Flow;
+
+        // Function to get a random number between 1 and 3
         function getRandomImageNumber() {
             return Math.floor(Math.random() * 3) + 1; // Adjust based on the number of images
         }
 
         // Function to display random images
-        function displayRandomImages(imageContainer) {
-            const rows = document.createElement('div');
+        function displayRandomImages() {
+            const { Renderer, Stave, StaveNote, Voice, Formatter, Beam } = Vex.Flow;
 
-            for (let i = 0; i < 4; i++) {
-                const imageElement = document.createElement('img');
-                imageElement.className = 'image';
-                const randomImageNumber = getRandomImageNumber();
-                imageElement.src = `image${randomImageNumber}.jpg`; // Adjust the image path and format
-                rows.appendChild(imageElement);
+            // Create an SVG renderer and attach it to the DIV element named "boo".
+            const div = document.getElementById("imageContainer");
+            const renderer = new Renderer(div, Renderer.Backends.SVG);
+
+            // Configure the rendering context.
+            renderer.resize(500, 500);
+            const context = renderer.getContext();
+
+            // Create a stave of width 400 at position 10, 40 on the canvas.
+            const stave = new Stave(10, 40, 400);
+
+            // Add a clef and time signature.
+            //            stave.addClef("treble").addTimeSignature("4/4");
+
+            // Connect it to the rendering context and draw!
+            stave.setContext(context).draw();
+
+
+            var notes = [];
+            var beams = [];
+            for (var i = 0; i < 4; i++) {
+                var note = [];
+                var beam = [];
+                switch (getRandomImageNumber()) {
+                    case 1:
+                        note.push(new StaveNote({
+                            keys: ["a/4"],
+                            duration: "q"
+                        }));
+                        break;
+                    case 2:
+                        note.push(new StaveNote({
+                            keys: ["a/4"],
+                            duration: "8r"
+                        }));
+                        note.push(new StaveNote({
+                            keys: ["a/4"],
+                            duration: "8"
+                        }));
+                        break;
+                    case 3:
+                        note.push(new StaveNote({
+                            keys: ["a/4"],
+                            duration: "8"
+                        }));
+                        note.push(new StaveNote({
+                            keys: ["a/4"],
+                            duration: "8"
+                        }));
+                        beam = [new Beam(note)];
+
+                        break;
+                }
+                console.log(note);
+                beams = beams.concat(beam);
+                notes = notes.concat(note);
             }
-            imageContainer.appendChild(rows);
+            console.log(notes);
+
+            // Create a voice in 4/4 and add above notes
+            const voice = new Voice({ num_beats: 4, beat_value: 4 });
+            voice.addTickables(notes);
+
+            // Format and justify the notes to 400 pixels.
+            new Formatter().joinVoices([voice]).format([voice], 350);
+
+            // Render voice
+            voice.draw(context, stave);
+            beams.forEach((b) => {
+                b.setContext(context).draw();
+            });
+
         }
 
         function showRandomImages(measures) {
-            const imageContainer = document.getElementById('imageContainer');
+            const imageContainer = document.getElementById("imageContainer");
             imageContainer.innerHTML = '';
 
             for (let i = 0; i < measures; i++)
-                displayRandomImages(imageContainer);
-            console.log(measures);
-            /*            if (measures == 1) {
-                            imageContainer.style.marginBottom = '160px';
-                        } else {
-                            imageContainer.style.marginBottom = '0';
-                        }*/
+                displayRandomImages();
         }
 
-        showRandomImages(1);
+        showRandomImages("1");
     </script>
 
     <footer>
         <a href="https://github.com/tgerla/rhythm-trainer">View on GitHub</a>
     </footer>
+
 </body>
 
 </html>
