@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Images</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <title>Rhythm Trainer</title>
     <style>
         body {
             display: flex;
@@ -23,17 +25,39 @@
             height: 148px;
             /* Adjust the height of your images */
         }
+
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+        }
+
+        #controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        #controls button {
+            padding: 10px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+        }
     </style>
 </head>
 
 <body>
-    <div id="imageContainer">
+    <div id="imageContainer" style="height: 300px;">
         <!-- Images will be added here dynamically -->
     </div>
     <div id="controls">
-        <button onclick="location.href='index.html?measures=1'">1 measure</button>
-        <button onclick="location.href='index.html?measures=2'">2 measures</button>
-        <button onclick="showRandomImages()">Refresh</button>
+        <button onclick="showRandomImages(1)"><span class="material-symbols-outlined">refresh</span>1</button>
+        <button onclick="showRandomImages(2)"><span class="material-symbols-outlined">refresh</span>2</button>
     </div>
 
 
@@ -45,8 +69,6 @@
 
         // Function to display random images
         function displayRandomImages(imageContainer) {
-            // erase all images from imageContainer
-
             const rows = document.createElement('div');
 
             for (let i = 0; i < 4; i++) {
@@ -59,19 +81,26 @@
             imageContainer.appendChild(rows);
         }
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const measures = urlParams.get('measures') || 1;
-
-        function showRandomImages(measures = 1) {
+        function showRandomImages(measures) {
             const imageContainer = document.getElementById('imageContainer');
             imageContainer.innerHTML = '';
 
             for (let i = 0; i < measures; i++)
                 displayRandomImages(imageContainer);
+            console.log(measures);
+            /*            if (measures == 1) {
+                            imageContainer.style.marginBottom = '160px';
+                        } else {
+                            imageContainer.style.marginBottom = '0';
+                        }*/
         }
 
-        showRandomImages(measures);
+        showRandomImages(1);
     </script>
+
+    <footer>
+        <a href="https://github.com/tgerla/rhythm-trainer">View on GitHub</a>
+    </footer>
 </body>
 
 </html>
