@@ -16,15 +16,18 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            overflow-x: hidden;
-            /* Hide horizontal overflow */
         }
 
-        .image {
-            width: 96px;
-            /* Adjust the width of your images */
-            height: 148px;
-            /* Adjust the height of your images */
+        #imageContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        @media (max-width: 600px) {
+            #imageContainer {
+                flex-direction: column;
+            }
         }
 
         footer {
@@ -37,8 +40,6 @@
         }
 
         #controls {
-            display: flex;
-            justify-content: center;
             gap: 10px;
             margin-top: 10px;
         }
@@ -46,14 +47,12 @@
         #controls button {
             padding: 10px;
             font-size: 20px;
-            display: flex;
-            align-items: center;
         }
     </style>
 </head>
 
 <body>
-    <div id="imageContainer" style="height: 300px;">
+    <div id="imageContainer">
         <!-- Images will be added here dynamically -->
     </div>
     <div id="controls">
@@ -79,11 +78,11 @@
             const renderer = new Renderer(div, Renderer.Backends.SVG);
 
             // Configure the rendering context.
-            renderer.resize(500, 500);
+            renderer.resize(500, 150);
             const context = renderer.getContext();
 
             // Create a stave of width 400 at position 10, 40 on the canvas.
-            const stave = new Stave(10, 40, 400);
+            const stave = new Stave(50, 40, 400);
 
             // Add a clef and time signature.
             //            stave.addClef("treble").addTimeSignature("4/4");
