@@ -1,25 +1,17 @@
 import { Renderer, Stave, StaveNote, Voice, Formatter, Beam } from 'vexflow'
 
-// Function to get a random number between 1 and 3
 function getRandomImageNumber() {
-    return Math.floor(Math.random() * 3) + 1; // Adjust based on the number of images
+    return Math.floor(Math.random() * 3) + 1;
 }
 
-// Function to display random images
-export function displayRandomImages(container) {
+export function renderScore(container) {
     const renderer = new Renderer(container, Renderer.Backends.CANVAS);
 
     // Configure the rendering context.
-    renderer.resize(500, 150);
+    renderer.resize(400, 100);
     const context = renderer.getContext();
 
-    // Create a stave of width 400 at position 10, 40 on the canvas.
-    const stave = new Stave(50, 40, 400);
-
-    // Add a clef and time signature.
-    //            stave.addClef("treble").addTimeSignature("4/4");
-
-    // Connect it to the rendering context and draw!
+    const stave = new Stave(0, 0, 399);
     stave.setContext(context).draw();
 
 
@@ -67,7 +59,7 @@ export function displayRandomImages(container) {
     voice.addTickables(notes);
 
     // Format and justify the notes to 400 pixels.
-    new Formatter().joinVoices([voice]).format([voice], 350);
+    new Formatter().joinVoices([voice]).format([voice], 380);
 
     // Render voice
     voice.draw(context, stave);

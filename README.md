@@ -9,3 +9,9 @@ Todo:
 - Auto-refresh timer to give you a new pattern on a regular basis.
 - 16th note patterns
 - Make sure it renders properly on mobile
+
+To publish:
+
+```
+git subtree push --prefix dist origin gh-pages
+```

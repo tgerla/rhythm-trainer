@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { displayRandomImages } from './score-renderer.js'
+import { renderScore } from './score-renderer.js'
 
 const measures = ref(1)
 const notes = ref(8)
@@ -14,10 +14,10 @@ function randomize() {
   imageContainer1.style.display = 'block';
   imageContainer2.style.display = 'none';
 
-  displayRandomImages("imageContainer1");
+  renderScore("imageContainer1");
 
   if (measures.value == 2) {
-    displayRandomImages("imageContainer2");
+    renderScore("imageContainer2");
     imageContainer2.style.display = 'block';
   }
 }
@@ -31,7 +31,7 @@ onMounted(() => {
   <main class="flex justify-center">
     <div class="flex flex-col justify-center">
       <h1 class="pt-4 flex justify-center">Rhythm Trainer</h1>
-      <div class="flex flex-row flex-wrap">
+      <div class="flex flex-row flex-wrap justify-center">
         <canvas id="imageContainer1"> </canvas>
         <canvas id="imageContainer2"> </canvas>
       </div>
