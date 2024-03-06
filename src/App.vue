@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import { renderScore } from './score-renderer.js'
 
 const measures = ref(1)
-const notes = ref(8)
+const divisions = ref("8")
 
 function randomize() {
   const imageContainer1 = document.getElementById('imageContainer1');
@@ -14,7 +14,7 @@ function randomize() {
   imageContainer1.style.display = 'block';
   imageContainer2.style.display = 'none';
 
-  renderScore("imageContainer1");
+  renderScore(divisions, "imageContainer1");
 
   if (measures.value == 2) {
     renderScore("imageContainer2");
@@ -52,11 +52,11 @@ onMounted(() => {
           </div>
           <div class="px-4">
             <div class="py-1">
-              <input class="mx-2" type="radio" id="eight" value="8" v-model="notes" />
+              <input @change="randomize()" class="mx-2" type="radio" id="eight" value="8" v-model="divisions" />
               <label for="eight">8th notes</label>
             </div>
             <div class="py-1">
-              <input class="mx-2" type="radio" id="sixteen" value="16" v-model="notes" />
+              <input @change="randomize()" class="mx-2" type="radio" id="sixteen" value="16" v-model="divisions" />
               <label for="sixteen">16th notes</label>
             </div>
           </div>
