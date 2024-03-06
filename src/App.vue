@@ -64,9 +64,7 @@ onMounted(() => {
         </div>
       </div>
       <footer class="border-t-2 text-sm text-gray-400">
-        Copyright (C) 2024 Timothy Gerla
-
-        (<a class="underline text-blue-500" href="https://github.com/tgerla/rhythm-trainer">View the source code</a>)
+        <a class="underline text-blue-500" href="https://github.com/tgerla/rhythm-trainer">View the source code</a>
       </footer>
     </div>
   </main>
