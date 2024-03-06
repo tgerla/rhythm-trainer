@@ -6,11 +6,17 @@ import { getARandom16th } from './sixteenth'
 export function renderScore(divisions, container) {
     const renderer = new Renderer(container, Renderer.Backends.CANVAS);
 
+    var width = 500; // for 8th notes
+    if (divisions.value === "16") { // for 16th notes
+        width = 620;
+    }
+
+
     // Configure the rendering context.
-    renderer.resize(621, 100);
+    renderer.resize(width, 100);
     const context = renderer.getContext();
 
-    const stave = new Stave(0, 0, 620);
+    const stave = new Stave(0, 0, width - 1);
     stave.setContext(context).draw();
 
 
@@ -49,8 +55,7 @@ export function renderScore(divisions, container) {
     const voice = new Voice({ num_beats: 4, beat_value: 4 });
     voice.addTickables(notes);
 
-    // Format and justify the notes to 400 pixels.
-    new Formatter().joinVoices([voice]).format([voice], 590);
+    new Formatter().joinVoices([voice]).format([voice], width - 30);
 
     // Render voice
     voice.draw(context, stave);
