@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  button {
+    @apply font-bold py-2 px-4 rounded;
+  }
+
+  .btn-blue {
+    @apply bg-blue-500 text-white;
+  }
+
+  .btn-blue:hover {
+    @apply bg-blue-700;
+  }
+
+  .btn-green {
+    @apply bg-green-500 text-white;
+  }
+
+  .btn-green:hover {
+    @apply bg-green-700;
+  }
+
+  .btn-yellow {
+    @apply bg-yellow-500 text-white;
+  }
+
+  .btn-yellow:hover {
+    @apply bg-yellow-700;
+  }
+
+  h1 {
+    @apply text-4xl font-bold;
+
+  }
+}
