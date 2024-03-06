@@ -16,8 +16,8 @@ function randomize() {
 
   renderScore(divisions, "imageContainer1");
 
-  if (measures.value == 2) {
-    renderScore("imageContainer2");
+  if (measures.value === "2") {
+    renderScore(divisions, "imageContainer2");
     imageContainer2.style.display = 'block';
   }
 }

@@ -4,6 +4,8 @@ This is a simple flashcard-style rhythm trainer. It will show you one or two ran
 
 [Try It Now!](https://tgerla.github.io/rhythm-trainer/)
 
+Thanks to Brian Dennis for the patterns and design ideas.
+
 Todo:
 
 - Auto-refresh timer to give you a new pattern on a regular basis.
