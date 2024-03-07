@@ -46,13 +46,15 @@ onMounted(() => {
   <main class="flex justify-center">
     <div class="flex flex-col justify-center">
       <h1 class="pt-4 flex justify-center">Rhythm Trainer</h1>
-      <div class="flex flex-row flex-wrap justify-center">
+      <div class="flex flex-row flex-wrap justify-center max-w-screen-md">
         <canvas id="imageContainer1"> </canvas>
         <canvas id="imageContainer2"> </canvas>
       </div>
       <div>
         <div class="flex justify-center" id="controls">
-          <button class="btn-yellow h-18 w-28" id="showButton" v-on:click="randomize()">Refresh</button>
+          <button class="btn-new-pattern h-18 w-48" id="showButton" v-on:click="randomize()"><span
+              class="mr-3">🎲</span>New
+            Pattern</button>
         </div>
         <div class="flex flex-row justify-center pt-4">
           <div class="px-4">
@@ -113,7 +115,7 @@ footer {
   padding: 10px;
 }
 
-Button {
+button {
   padding: 10px;
   margin: 10px;
 }

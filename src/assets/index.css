@@ -23,12 +23,12 @@
     @apply bg-green-700;
   }
 
-  .btn-yellow {
-    @apply bg-yellow-500 text-white;
+  .btn-new-pattern {
+    @apply bg-yellow-300;
   }
 
-  .btn-yellow:hover {
-    @apply bg-yellow-700;
+  .btn-new-pattern:hover {
+    @apply bg-yellow-500;
   }
 
   h1 {

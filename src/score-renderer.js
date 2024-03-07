@@ -54,7 +54,7 @@ export function renderScore(divisions, container) {
         var beam;
 
         // alternate note color
-        noteColor = i % 2 === 0 ? "green" : "black";
+        noteColor = i % 2 === 0 ? "darkgreen" : "black";
 
         if (divisions === "8") {
             ({ note, beam } = getAn8thPattern(random(3)));
