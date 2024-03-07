@@ -44,7 +44,7 @@ onMounted(() => {
 
 <template>
   <main class="flex justify-center">
-    <div class="flex flex-col justify-center">
+    <div class="flex flex-col justify-center mb-16">
       <h1 class="pt-4 flex justify-center">Rhythm Trainer</h1>
       <div class="flex flex-row flex-wrap justify-center max-w-screen-md">
         <canvas id="imageContainer1"> </canvas>
@@ -82,8 +82,8 @@ onMounted(() => {
         <div id="tests">
         </div>
       </div>
-      <footer class="border-t-2 text-sm text-gray-400">
-        <a class="underline text-blue-500" href="https://github.com/tgerla/rhythm-trainer">View the source code</a>
+      <footer>
+        <a class="underline text-blue-500" href="https://github.com/tgerla/rhythm-trainer">GitHub</a>
       </footer>
     </div>
   </main>
@@ -111,7 +111,7 @@ footer {
   left: 0;
   bottom: 0;
   width: 100%;
-  text-align: center;
+  text-align: right;
   padding: 10px;
 }
 

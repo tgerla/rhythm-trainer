@@ -12,3 +12,5 @@ Todo:
 - Auto-refresh timer to give you a new pattern on a regular basis.
 - Make sure it renders properly on mobile
 - Dark mode
+- Fix for narrow screens
+- 
