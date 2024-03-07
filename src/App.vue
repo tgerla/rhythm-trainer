@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { renderScore } from './score-renderer.js'
+import { renderScore, renderScoreTests } from './score-renderer.js'
 
 const measures = ref(1)
 const divisions = ref("8")
@@ -14,16 +14,31 @@ function randomize() {
   imageContainer1.style.display = 'block';
   imageContainer2.style.display = 'none';
 
-  renderScore(divisions, "imageContainer1");
+  renderScore(divisions.value, "imageContainer1");
 
   if (measures.value === "2") {
-    renderScore(divisions, "imageContainer2");
+    renderScore(divisions.value, "imageContainer2");
     imageContainer2.style.display = 'block';
   }
 }
 
 onMounted(() => {
   randomize();
+
+  /*
+  for (let i = 1; i <= 3; i++) {
+    const testCanvas = document.createElement('canvas');
+    testCanvas.id = "testScore" + i;
+    renderScoreTests("8", i, testCanvas)
+    document.getElementById('tests').appendChild(testCanvas);
+  }
+  for (let i = 1; i <= 16; i++) {
+    const testCanvas = document.createElement('canvas');
+    testCanvas.id = "testScore" + i;
+    renderScoreTests("16", i, testCanvas)
+    document.getElementById('tests').appendChild(testCanvas);
+  } */
+
 })
 </script>
 
@@ -61,6 +76,8 @@ onMounted(() => {
             </div>
           </div>
 
+        </div>
+        <div id="tests">
         </div>
       </div>
       <footer class="border-t-2 text-sm text-gray-400">

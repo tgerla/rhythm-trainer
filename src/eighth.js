@@ -1,10 +1,9 @@
 import { StaveNote, Beam } from "vexflow";
-import { random } from "./util";
 
-export function getARandom8th() {
+export function getAn8thPattern(idx) {
     var note = [];
     var beam = [];
-    switch (random(3)) {
+    switch (idx) {
         case 1: // Quarter note
             note.push(new StaveNote({
                 keys: ["a/4"],
@@ -32,6 +31,8 @@ export function getARandom8th() {
             }));
             beam = [new Beam(note)];
             break;
+        default:
+            console.log("invalid index for 8th note pattern:", idx);
     }
     return { note, beam };
 }

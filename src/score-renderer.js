@@ -1,24 +1,49 @@
 import { Renderer, Stave, StaveNote, Voice, Formatter, Beam } from 'vexflow'
 
-import { getARandom8th } from './eighth'
-import { getARandom16th } from './sixteenth'
+import { getAn8thPattern } from './eighth'
+import { getA16thPattern } from './sixteenth'
+import { random } from "./util";
 
-export function renderScore(divisions, container) {
+function setupVex(divisions, container) {
     const renderer = new Renderer(container, Renderer.Backends.CANVAS);
 
-    var width = 500; // for 8th notes
-    if (divisions.value === "16") { // for 16th notes
-        width = 620;
+    var width;
+    console.log("divisions:", divisions)
+    switch (divisions) {
+        case "8":
+            width = 500;
+            break;
+        case "16":
+            width = 620;
+            break;
+        default:
+            alert("yyy invalid state for divisions:", divisions.value)
     }
-
 
     // Configure the rendering context.
     renderer.resize(width, 100);
     const context = renderer.getContext();
 
-    const stave = new Stave(0, 0, width - 1);
+    const stave = new Stave(0, 0, width - 1, { num_lines: 1 });
     stave.setContext(context).draw();
 
+    return [stave, context, width];
+}
+
+function renderVex(notes, beams, context, stave, width, beats = 4) {
+    const voice = new Voice({ num_beats: beats, beat_value: 4 });
+    voice.addTickables(notes);
+
+    new Formatter().joinVoices([voice]).format([voice], width - 30);
+
+    voice.draw(context, stave);
+    beams.forEach((b) => {
+        b.setContext(context).draw();
+    });
+}
+
+export function renderScore(divisions, container) {
+    let [stave, context, width] = setupVex(divisions, container);
 
     var notes = [];
     var beams = [];
@@ -29,15 +54,14 @@ export function renderScore(divisions, container) {
         var beam;
 
         // alternate note color
-        noteColor = i % 2 === 0 ? "blue" : "black";
+        noteColor = i % 2 === 0 ? "green" : "black";
 
-        if (divisions.value === "8") {
-            ({ note, beam } = getARandom8th());
-        } else if (divisions.value === "16") {
-            ({ note, beam } = getARandom16th());
+        if (divisions === "8") {
+            ({ note, beam } = getAn8thPattern(random(3)));
+        } else if (divisions === "16") {
+            ({ note, beam } = getA16thPattern(random(16)));
         } else {
-            alert("invalid state for divisions:", divisions.value)
-            divisions.value = "8"
+            alert("invalid state for divisions:", divisions)
         }
 
         note.forEach((n) => {
@@ -48,18 +72,26 @@ export function renderScore(divisions, container) {
         })
         beams = beams.concat(beam);
         notes = notes.concat(note);
-
     }
 
-    // Create a voice in 4/4 and add above notes
-    const voice = new Voice({ num_beats: 4, beat_value: 4 });
-    voice.addTickables(notes);
+    renderVex(notes, beams, context, stave, width);
+}
 
-    new Formatter().joinVoices([voice]).format([voice], width - 30);
+export function renderScoreTests(divisions, patternIndex, container) {
+    let [stave, context, width] = setupVex(divisions, container);
 
-    // Render voice
-    voice.draw(context, stave);
-    beams.forEach((b) => {
-        b.setContext(context).draw();
-    });
+    var note;
+    var beam;
+
+    switch (divisions) {
+        case "8":
+            ({ note, beam } = getAn8thPattern(patternIndex));
+            break;
+        case "16":
+            ({ note, beam } = getA16thPattern(patternIndex));
+            break;
+        default:
+            alert("xxx invalid state for divisions:", divisions.value)
+    }
+    renderVex(note, beam, context, stave, width, 1);
 }

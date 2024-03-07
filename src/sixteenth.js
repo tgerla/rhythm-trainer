@@ -1,10 +1,10 @@
 import { StaveNote, Beam } from "vexflow";
 import { random } from "./util";
 
-export function getARandom16th() {
+export function getA16thPattern(idx) {
     var note = [];
     var beam = [];
-    switch (random(16)) {
+    switch (idx) {
         case 1: // note rest rest rest
             note.push(new StaveNote({
                 keys: ["a/4"],
@@ -342,6 +342,8 @@ export function getARandom16th() {
                 duration: "16r"
             }));
             break;
+        default:
+            console.log("invalid index for 16th note pattern:", idx);
     }
     return { note, beam };
 }
