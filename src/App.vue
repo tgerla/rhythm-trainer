@@ -89,34 +89,3 @@ onMounted(() => {
   </main>
 
 </template>
-
-<style scoped>
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-
-@media (max-width: 600px) {
-  #imageContainer {
-    flex-direction: column;
-  }
-}
-
-footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  text-align: right;
-  padding: 10px;
-}
-
-button {
-  padding: 10px;
-  margin: 10px;
-}
-</style>
